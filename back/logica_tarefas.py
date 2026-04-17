@@ -57,3 +57,102 @@ def verify_login(email, password):
     finally:
         if connection:
             encerrarConexao(connection)
+
+def create_task(user_id, tittle, description):
+
+    connection = criarConexao("localhost", "root", "Mayke@A1223145", "SysGerenciamentoTarefas")
+
+    try:
+         
+        sql_insert = "insert into tasks (usuario_id, titulo, descricao) values (%s, %s, %s)"
+        data = (user_id, tittle, description)
+
+
+        new_task = insertNoBancoDados(connection, sql_insert, data)
+
+        if new_task:
+            return {"success": "Task created successfully.", "task_id": new_task}, 201
+        else:
+            return {"error": "Failed to create task."}, 500
+    
+    except Exception as e:
+
+        return {"error": "An error occurred while creating the task."}, 500
+    
+    finally:
+
+        if connection:
+            encerrarConexao(connection)
+       
+
+def list_tasks(user_id):
+
+    connection = criarConexao("localhost", "root", "Mayke@A1223145", "SysGerenciamentoTarefas")
+
+    try:
+         
+         sql_search = "select id, titulo, descricao, status from tasks where usuario_id = %s"
+
+         tasks = listarBancoDados(connection, sql_search, (user_id,))
+
+         task_list = [{"id": task[0], "tittle": task[1], "description": task[2], "status": task[3]} for task in tasks]
+
+         return {"tasks": task_list}, 200
+    
+    except Exception as e:
+
+        return {"error": "An error occurred while listing tasks."}, 500
+    
+    finally:
+
+        if connection:
+            encerrarConexao(connection)
+
+def delete_task(task_id, user_id):
+
+    try:
+
+        connection = criarConexao("localhost", "root", "Mayke@A1223145", "SysGerenciamentoTarefas")
+
+        sql_delete = "delete from tasks where id = %s and usuario_id = %s"
+
+        deleted_rows = excluirBancoDados(connection, sql_delete, (task_id, user_id))
+
+        if deleted_rows > 0:
+            
+            return {"success": "Task deleted successfully."}, 200
+        else:
+            return {"error": "Task not found or you do not have permission to delete it."}, 404
+    
+    except Exception as e:
+
+        return {"error": "An error occurred while deleting the task."}, 500
+    
+    finally:
+
+        if connection:
+            encerrarConexao(connection)
+
+def alter_task_status(task_id, user_id, new_status):
+
+    try:
+        connection = criarConexao("localhost", "root", "Mayke@A1223145", "SysGerenciamentoTarefas")
+
+        sql_update = "update tasks set status = %s where id = %s and usuario_id = %s"
+
+        updated_rows = atualizarBancoDados(connection, sql_update, (new_status, task_id, user_id))
+
+        if updated_rows > 0:
+            return {"success": "Task status updated successfully."}, 200
+        else:
+            return {"error": "Task not found or you do not have permission to update it."}, 404
+    
+    except Exception as e:
+        return {"error": "An error occurred while updating the task status."}, 500
+    
+    finally:
+
+        if connection:
+            encerrarConexao(connection)
+
+        
