@@ -146,6 +146,20 @@ input:focus {
     transform: translateY(-2px);
 }
 
+.btn-sm-custom {
+    width: auto;
+    padding: 6px 12px;
+    font-size: 0.7rem;
+    margin: 0 2px;
+}
+
+.dashboard-header {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; 
+    padding: 1rem 0;
+}
+
 /* Tabela */
 .table-wrapper {
     overflow-x: auto;

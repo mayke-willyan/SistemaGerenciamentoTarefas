@@ -34,6 +34,7 @@ def login():
         if not email or not password:
             return jsonify({"error": "Email and password are required."}), 400
         
+        
         result, status = verify_login(email, password)
         return jsonify(result), status
     
@@ -48,13 +49,13 @@ def create_task_route():
         data = request.get_json()
 
         user_id = data.get('user_id')
-        tittle = data.get('tittle')
+        title = data.get('title')
         description = data.get('description')
 
-        if not user_id or not tittle or not description:
+        if not user_id or not title or not description:
             return jsonify({"error": "User ID, title, and description are required."}), 400
         
-        result, status = create_task(user_id, tittle, description)
+        result, status = create_task(user_id, title, description)
         return jsonify(result), status
     
     except Exception as e:
@@ -93,22 +94,21 @@ def delete_task_route(task_id):
 
         return jsonify({"error": "An error occurred while deleting the task."}), 500
     
-@task_route.route("/tasks/<int:task_id>/status", methods=["PATCH"])
+@task_route.route("/tasks/<int:task_id>", methods=["PATCH"])
 def update_task_status(task_id):
 
     try:
 
         data = request.get_json()
         user_id = data.get('user_id')
-        new_status = data.get('status')
 
         if not user_id:
             return jsonify({"error": "User ID is required."}), 400
         
-        result,status = alter_task_status(task_id, user_id, new_status)
+        result,status = alter_task_status(task_id, user_id)
 
         return jsonify(result), status
 
     except Exception as e:
 
-        return jsonify({"error": "An error occurred while updating the task status."}), 500
+        return jsonify({"error": "An error occurred while updating the task status rotas."}), 500

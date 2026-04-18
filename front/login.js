@@ -16,20 +16,20 @@ export async function send_login(data){
             body: JSON.stringify(data)
         })
 
-        return await response.json();
+        return await response.json()
     }
 
     catch(error){
-        console.error('Failed to authenticate user:', error);
+        console.error('Failed to authenticate user:', error)
         return null;
     }
 }
 
 export function treat_login_response(data){
     if (data.success){
-        console.log('User authenticated successfully:', data);
+        console.log('User authenticated successfully:', data)
     }
     else{
-        console.error('Failed to authenticate user:', data);
+        console.error('Failed to authenticate user:', data)
     }
 }
