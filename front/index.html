@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskForce</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=JetBrains+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="auth-container" class="container">
+        <header>
+            <div class="logo">📅 TASK<span>FORCE</span></div>
+            
+        </header>
+
+        <div id="login-card" class="card fade-in">
+            <h2>Login</h2>
+            <form id="form-login">
+                <div class="form-group">
+                    <input type="email" id="login-email" placeholder="Email de acesso" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login-password" placeholder="Senha" required>
+                </div>
+                <button type="submit" class="btn btn-primary" id="login-btn">AUTENTICAR</button>
+                <p class="switch-form">Novo por aqui? <a href="#" id="go-to-register">Criar conta</a></p>
+            </form>
+        </div>
+
+        <div id="register-card" class="card fade-in hidden">
+            <h2>Cadastro</h2>
+            <form id="form-register">
+                <div class="form-group">
+                    <input type="text" id="reg-name" placeholder="Nome completo" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="reg-email" placeholder="Seu melhor email" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="reg-password" placeholder="Defina uma senha" required>
+                </div>
+                <button type="submit" class="btn btn-primary" id="register-btn">REGISTRAR AGORA</button>
+                <p class="switch-form">Já tem conta? <a href="#" id="go-to-login">Voltar ao login</a></p>
+            </form>
+        </div>
+    </div>
+
+    <div id="main-container" class="container hidden">
+        <header class="dashboard-header">
+            <div class="user-info">
+                <span id="user-name">Usuário</span>
+                <button id="btn-logout" class="btn btn-outline">LOGOUT</button>
+            </div>
+        </header>
+
+        <main class="grid-layout">
+            <section class="input-section">
+                <div class="card">
+                    <h3>Nova Task</h3>
+                    <form id="form-tarefa">
+                        <div class="form-group">
+                            <label>Título</label>
+                            <input type="text" id="titulo" placeholder="O que precisa ser feito?" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Descrição</label>
+                            <textarea id="descricao" rows="3" placeholder="Detalhes da tarefa..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">ADICIONAR TAREFA</button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="list-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Minhas Tarefas</h3>
+                        <span id="task-count" class="badge">0</span>
+                    </div>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Tarefa</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabela-body">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
