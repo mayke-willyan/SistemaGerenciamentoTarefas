@@ -1,7 +1,3 @@
-Com certeza. Aqui está o conteúdo integral para o seu arquivo `README.md`, formatado corretamente em Markdown (MD), consolidando todos os arquivos, a estrutura do projeto, a documentação da API e o guia de instalação.
-
-Pode copiar o bloco abaixo:
-
 ```markdown
 # 📅 TaskForce - Gerenciador de Tarefas Full Stack
 
